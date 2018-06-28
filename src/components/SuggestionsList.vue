@@ -40,6 +40,7 @@ export default {
 
 <style lang="scss" scoped>
 .suggestions-container {
+  flex: 1 100%;
   font-size: 1.4rem;
   ul {
     list-style-type: none;

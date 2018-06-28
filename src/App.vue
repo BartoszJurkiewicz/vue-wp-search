@@ -1,7 +1,15 @@
 <template>
   <div id="app">
-    <search-input @inputChange="search" @selectChange="values => { changePostType(values) }" @focused="suggestionsActive = true" @blurred="suggestionsActive = false" />
-    <suggestions-list :active="suggestionsActive" :results="results" :postType="postType" />
+    <el-button icon="el-icon-search" @click="searchActive = true" circle></el-button>
+    <transition name="fade">
+      <div v-if="searchActive" class="search-container">
+        <div class="close">
+          <el-button icon="el-icon-close" @click="searchActive = false" circle></el-button>
+        </div>
+        <search-input ref="searchInput" @inputChange="search" @selectChange="values => { changePostType(values) }" @focused="suggestionsActive = true" @blurred="suggestionsActive = true" />
+        <suggestions-list :active="suggestionsActive" :results="results" :postType="postType" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -17,6 +25,7 @@ export default {
       postType: '',
       results: {},
       suggestionsActive: false,
+      searchActive: false,
       timeout: null
     }
   },
@@ -51,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import url("https://cdn.jsdelivr.net/npm/element-ui@1.4.2/lib/theme-default/index.css");
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
@@ -69,5 +78,21 @@ export default {
 }
 .el-select .el-input {
   width: 110px;
+}
+.search-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 15rem 30rem;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,.6);
+  z-index: 99;
+  .close {
+    align-self: flex-end;
+    margin-bottom: 2rem;
+  }
 }
 </style>
