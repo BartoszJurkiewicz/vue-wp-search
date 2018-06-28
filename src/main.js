@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import { Input, Select, Option, Button, Autocomplete } from 'element-ui';
+import { Input, Select, Option, Button, Card } from 'element-ui';
 import App from './App.vue'
 
 Vue.use(Input)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Button)
-Vue.use(Autocomplete)
+Vue.use(Card)
 Vue.config.productionTip = false
 
 new Vue({
